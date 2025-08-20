@@ -1,0 +1,188 @@
+@use '../../styles/mixins/layout' as layout;
+@use '../../styles/mixins/typography' as text;
+@use '../../styles/mixins/media' as media;
+@use '../../styles/components/button' as btn;
+
+// Button base styles
+.btn {
+  @include btn.btn-base;
+  @include text.button-text;
+  position: relative;
+  overflow: hidden;
+  
+  // Focus states
+  &:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+  
+  // Disabled state
+  &--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  
+  // Loading state
+  &--loading {
+    cursor: wait;
+    
+    .btn__content {
+      opacity: 0.7;
+    }
+    
+    &:hover {
+      transform: none !important;
+      box-shadow: none !important;
+    }
+  }
+  
+  // Full width
+  &--full-width {
+    width: 100%;
+  }
+  
+  // Size variants
+  &--xs { @include btn.btn-size(xs); }
+  &--sm { @include btn.btn-size(sm); }
+  &--md { @include btn.btn-size(md); }
+  &--lg { @include btn.btn-size(lg); }
+  &--xl { @include btn.btn-size(xl); }
+  
+  // Variant styles
+  &--primary {
+    @include btn.btn-variant(var(--color-primary), white, var(--color-primary-dark));
+  }
+  
+  &--secondary {
+    @include btn.btn-variant(var(--color-gray-200), var(--color-gray-800), var(--color-gray-300));
+  }
+  
+  &--success {
+    @include btn.btn-variant(var(--color-success), white, map-get(btn.$btn-hover-colors, success));
+  }
+  
+  &--warning {
+    @include btn.btn-variant(var(--color-warning), white, map-get(btn.$btn-hover-colors, warning));
+  }
+  
+  &--error {
+    @include btn.btn-variant(var(--color-error), white, map-get(btn.$btn-hover-colors, error));
+  }
+  
+  &--ghost {
+    background-color: transparent;
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+    
+    &:hover:not(.btn--disabled):not(.btn--loading) {
+      background-color: var(--color-primary);
+      color: white;
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+    
+    &:active:not(.btn--disabled):not(.btn--loading) {
+      transform: translateY(0);
+      box-shadow: var(--shadow-sm);
+    }
+  }
+}
+
+// Button content
+.btn__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Icon styles
+.btn--icon {
+  .btn__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  
+  .btn__content {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.btn--icon-left {
+  .btn__icon {
+    margin-right: var(--spacing-xs);
+  }
+}
+
+.btn--icon-right {
+  .btn__icon {
+    margin-left: var(--spacing-xs);
+  }
+}
+
+// Icon-only button (sadece icon, text yok)
+.btn--icon-only {
+  padding-left: var(--spacing-xs);
+  padding-right: var(--spacing-xs);
+  
+  .btn__icon {
+    margin: 0; // Icon margin'ini sıfırla
+  }
+  
+  .btn__content {
+    display: none; // Text content'i gizle
+  }
+}
+
+// Size-specific icon adjustments
+.btn--xs.btn--icon { @include btn.btn-icon-size(xs); }
+.btn--sm.btn--icon { @include btn.btn-icon-size(sm); }
+.btn--md.btn--icon { @include btn.btn-icon-size(md); }
+.btn--lg.btn--icon { @include btn.btn-icon-size(lg); }
+.btn--xl.btn--icon { @include btn.btn-icon-size(xl); }
+
+// Icon-only size adjustments
+.btn--xs.btn--icon-only {
+  padding: var(--spacing-xs);
+  min-width: 24px; // Square button
+}
+
+.btn--sm.btn--icon-only {
+  padding: var(--spacing-xs);
+  min-width: 32px;
+}
+
+.btn--md.btn--icon-only {
+  padding: var(--spacing-sm);
+  min-width: 40px;
+}
+
+.btn--lg.btn--icon-only {
+  padding: var(--spacing-sm);
+  min-width: 48px;
+}
+
+.btn--xl.btn--icon-only {
+  padding: var(--spacing-md);
+  min-width: 56px;
+}
+
+// Ripple effect
+.btn__ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(0);
+  animation: ripple-animation 0.6s linear;
+  pointer-events: none;
+}
+
+@keyframes ripple-animation {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}

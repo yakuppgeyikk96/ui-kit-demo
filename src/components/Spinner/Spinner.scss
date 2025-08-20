@@ -1,0 +1,78 @@
+@use '../../styles/mixins/layout' as layout;
+@use '../../styles/mixins/typography' as text;
+
+.spinner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  
+  // Size variants
+  &--xs {
+    width: 12px;
+    height: 12px;
+  }
+  
+  &--sm {
+    width: 16px;
+    height: 16px;
+  }
+  
+  &--md {
+    width: 20px;
+    height: 20px;
+  }
+  
+  &--lg {
+    width: 24px;
+    height: 24px;
+  }
+  
+  &--xl {
+    width: 32px;
+    height: 32px;
+  }
+  
+  // SVG styles
+  &__svg {
+    width: 100%;
+    height: 100%;
+    animation: spin 1s linear infinite;
+  }
+  
+  &__circle {
+    stroke-linecap: round;
+    stroke-dasharray: 80;
+    stroke-dashoffset: 60;
+    animation: dash 1.5s ease-in-out infinite;
+  }
+}
+
+// Animations
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
+  }
+}
+
+// Screen reader only text
+.sr-only {
+  @include text.sr-only;
+}

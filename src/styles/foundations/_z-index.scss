@@ -1,0 +1,28 @@
+// Z-index system
+$z-index-auto: auto;
+$z-index-0: 0;
+$z-index-10: 10;
+$z-index-20: 20;
+$z-index-30: 30;
+$z-index-40: 40;
+$z-index-50: 50;
+
+// Component-specific z-index values
+$z-index-dropdown: 1000;
+$z-index-sticky: 1020;
+$z-index-fixed: 1030;
+$z-index-modal-backdrop: 1040;
+$z-index-modal: 1050;
+$z-index-popover: 1060;
+$z-index-tooltip: 1070;
+$z-index-toast: 1080;
+$z-index-notification: 1090;
+
+// Semantic z-index groups
+$z-index-base: $z-index-0;
+$z-index-above: $z-index-10;
+$z-index-overlay: $z-index-dropdown;
+$z-index-modal: $z-index-modal;
+$z-index-popup: $z-index-popover;
+$z-index-tooltip: $z-index-tooltip;
+$z-index-notification: $z-index-notification;

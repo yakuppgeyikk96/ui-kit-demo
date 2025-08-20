@@ -1,0 +1,32 @@
+// Base spacing unit (4px grid system)
+$spacing-unit: 4px;
+
+// Spacing scale
+$spacing-0: 0;
+$spacing-1: $spacing-unit;      // 4px
+$spacing-2: $spacing-unit * 2;  // 8px
+$spacing-3: $spacing-unit * 3;  // 12px
+$spacing-4: $spacing-unit * 4;  // 16px
+$spacing-5: $spacing-unit * 5;  // 20px
+$spacing-6: $spacing-unit * 6;  // 24px
+$spacing-8: $spacing-unit * 8;  // 32px
+$spacing-10: $spacing-unit * 10; // 40px
+$spacing-12: $spacing-unit * 12; // 48px
+$spacing-16: $spacing-unit * 16; // 64px
+$spacing-20: $spacing-unit * 20; // 80px
+$spacing-24: $spacing-unit * 24; // 96px
+
+// Common spacing values
+$spacing-xs: $spacing-1;        // 4px
+$spacing-sm: $spacing-2;        // 8px
+$spacing-md: $spacing-4;        // 16px
+$spacing-lg: $spacing-6;        // 24px
+$spacing-xl: $spacing-8;        // 32px
+$spacing-2xl: $spacing-12;      // 48px
+$spacing-3xl: $spacing-16;      // 64px
+
+
+// Shadow offsets (for depth)
+$shadow-offset-sm: $spacing-1;   // 4px
+$shadow-offset-md: $spacing-2;   // 8px
+$shadow-offset-lg: $spacing-3;   // 12px

@@ -1,0 +1,122 @@
+// Media query mixins for responsive design
+@use '../foundations/breakpoints' as bp;
+
+// Basic responsive mixins
+@mixin mobile-only {
+  @media (max-width: #{bp.$breakpoint-sm - 1px}) {
+    @content;
+  }
+}
+
+@mixin tablet-up {
+  @media (min-width: #{bp.$breakpoint-md}) {
+    @content;
+  }
+}
+
+@mixin desktop-up {
+  @media (min-width: #{bp.$breakpoint-lg}) {
+    @content;
+  }
+}
+
+@mixin large-desktop-up {
+  @media (min-width: #{bp.$breakpoint-xl}) {
+    @content;
+  }
+}
+
+// Specific breakpoint mixins
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == xs {
+    @media (min-width: bp.$breakpoint-xs) { @content; }
+  } @else if $breakpoint == sm {
+    @media (min-width: bp.$breakpoint-sm) { @content; }
+  } @else if $breakpoint == md {
+    @media (min-width: bp.$breakpoint-md) { @content; }
+  } @else if $breakpoint == lg {
+    @media (min-width: bp.$breakpoint-lg) { @content; }
+  } @else if $breakpoint == xl {
+    @media (min-width: bp.$breakpoint-xl) { @content; }
+  } @else if $breakpoint == 2xl {
+    @media (min-width: bp.$breakpoint-2xl) { @content; }
+  }
+}
+
+// Orientation mixins
+@mixin portrait {
+  @media (orientation: portrait) { @content; }
+}
+
+@mixin landscape {
+  @media (orientation: landscape) { @content; }
+}
+
+// Device type mixins
+@mixin touch-device {
+  @media (hover: none) and (pointer: coarse) { @content; }
+}
+
+@mixin mouse-device {
+  @media (hover: hover) and (pointer: fine) { @content; }
+}
+
+// High DPI displays
+@mixin retina {
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) { @content; }
+}
+
+// Print styles
+@mixin print {
+  @media print { @content; }
+}
+
+// Container mixin
+@mixin container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--spacing-md);
+  padding-right: var(--spacing-md);
+}
+
+// Container responsive mixins
+@mixin container-sm {
+  @include respond-to(sm) {
+    max-width: bp.$container-max-width-sm;
+  }
+}
+
+@mixin container-md {
+  @include respond-to(md) {
+    max-width: bp.$container-max-width-md;
+  }
+}
+
+@mixin container-lg {
+  @include respond-to(lg) {
+    max-width: bp.$container-max-width-lg;
+  }
+}
+
+@mixin container-xl {
+  @include respond-to(xl) {
+    max-width: bp.$container-max-width-xl;
+  }
+}
+
+@mixin container-2xl {
+  @include respond-to(2xl) {
+    max-width: bp.$container-max-width-2xl;
+  }
+}
+
+// Full container with all breakpoints
+@mixin container-full {
+  @include container;
+  @include container-sm;
+  @include container-md;
+  @include container-lg;
+  @include container-xl;
+  @include container-2xl;
+}

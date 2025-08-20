@@ -1,0 +1,201 @@
+@use 'foundations/colors' as *;
+@use 'foundations/spacing' as *;
+@use 'foundations/typography' as *;
+@use 'foundations/shadows' as *;
+@use 'foundations/border-radius' as *;
+@use 'foundations/transitions' as *;
+@use 'foundations/z-index' as *;
+@use 'foundations/breakpoints' as *;
+@use 'mixins/media' as media;
+@use 'mixins/layout' as layout;
+@use 'mixins/typography' as text;
+@use 'components/button' as button;
+
+// CSS Custom Properties oluştur
+:root {
+  --color-white: #{$color-white};
+  --color-black: #{$color-black};
+  
+  --color-gray-50: #{$color-gray-50};
+  --color-gray-100: #{$color-gray-100};
+  --color-gray-200: #{$color-gray-200};
+  --color-gray-300: #{$color-gray-300};
+  --color-gray-400: #{$color-gray-400};
+  --color-gray-500: #{$color-gray-500};
+  --color-gray-600: #{$color-gray-600};
+  --color-gray-700: #{$color-gray-700};
+  --color-gray-800: #{$color-gray-800};
+  --color-gray-900: #{$color-gray-900};
+  
+  --color-primary: #{$color-primary};
+  --color-primary-light: #{$color-primary-light};
+  --color-primary-dark: #{$color-primary-dark};
+  
+  --color-success: #{$color-success};
+  --color-warning: #{$color-warning};
+  --color-error: #{$color-error};
+  --color-info: #{$color-info};
+  
+  --spacing-0: #{$spacing-0};
+  --spacing-1: #{$spacing-1};
+  --spacing-2: #{$spacing-2};
+  --spacing-3: #{$spacing-3};
+  --spacing-4: #{$spacing-4};
+  --spacing-5: #{$spacing-5};
+  --spacing-6: #{$spacing-6};
+  --spacing-8: #{$spacing-8};
+  --spacing-10: #{$spacing-10};
+  --spacing-12: #{$spacing-12};
+  --spacing-16: #{$spacing-16};
+  --spacing-20: #{$spacing-20};
+  --spacing-24: #{$spacing-24};
+  
+  --spacing-xs: #{$spacing-xs};
+  --spacing-sm: #{$spacing-sm};
+  --spacing-md: #{$spacing-md};
+  --spacing-lg: #{$spacing-lg};
+  --spacing-xl: #{$spacing-xl};
+  --spacing-2xl: #{$spacing-2xl};
+  --spacing-3xl: #{$spacing-3xl};
+  
+  // Typography
+  --font-family-sans: #{$font-family-sans};
+  --font-family-mono: #{$font-family-mono};
+  
+  --font-size-xs: #{$font-size-xs};
+  --font-size-sm: #{$font-size-sm};
+  --font-size-base: #{$font-size-base};
+  --font-size-lg: #{$font-size-lg};
+  --font-size-xl: #{$font-size-xl};
+  --font-size-2xl: #{$font-size-2xl};
+  --font-size-3xl: #{$font-size-3xl};
+  --font-size-4xl: #{$font-size-4xl};
+  --font-size-5xl: #{$font-size-5xl};
+  
+  --font-weight-light: #{$font-weight-light};
+  --font-weight-normal: #{$font-weight-normal};
+  --font-weight-medium: #{$font-weight-medium};
+  --font-weight-semibold: #{$font-weight-semibold};
+  --font-weight-bold: #{$font-weight-bold};
+  
+  --line-height-tight: #{$line-height-tight};
+  --line-height-snug: #{$line-height-snug};
+  --line-height-normal: #{$line-height-normal};
+  --line-height-relaxed: #{$line-height-relaxed};
+  --line-height-loose: #{$line-height-loose};
+  
+  // Shadows
+  --shadow-sm: #{$shadow-sm};
+  --shadow-base: #{$shadow-base};
+  --shadow-md: #{$shadow-md};
+  --shadow-lg: #{$shadow-lg};
+  --shadow-xl: #{$shadow-xl};
+  --shadow-2xl: #{$shadow-2xl};
+  
+  --shadow-inner: #{$shadow-inner};
+  --shadow-primary: #{$shadow-primary};
+  --shadow-success: #{$shadow-success};
+  --shadow-warning: #{$shadow-warning};
+  --shadow-error: #{$shadow-error};
+  
+  // Border radius
+  --border-radius-none: #{$border-radius-none};
+  --border-radius-sm: #{$border-radius-sm};
+  --border-radius-base: #{$border-radius-base};
+  --border-radius-md: #{$border-radius-md};
+  --border-radius-lg: #{$border-radius-lg};
+  --border-radius-xl: #{$border-radius-xl};
+  --border-radius-2xl: #{$border-radius-2xl};
+  --border-radius-3xl: #{$border-radius-3xl};
+  --border-radius-full: #{$border-radius-full};
+  
+  --border-radius-button: #{$border-radius-button};
+  --border-radius-input: #{$border-radius-input};
+  --border-radius-card: #{$border-radius-card};
+  --border-radius-modal: #{$border-radius-modal};
+  --border-radius-avatar: #{$border-radius-avatar};
+  --border-radius-badge: #{$border-radius-badge};
+  
+  // Border width
+  --border-width-0: #{$border-width-0};
+  --border-width-1: #{$border-width-1};
+  --border-width-2: #{$border-width-2};
+  --border-width-4: #{$border-width-4};
+  --border-width-8: #{$border-width-8};
+  
+  // Border style
+  --border-style-solid: #{$border-style-solid};
+  --border-style-dashed: #{$border-style-dashed};
+  --border-style-dotted: #{$border-style-dotted};
+  --border-style-none: #{$border-style-none};
+  
+  // Transitions
+  --transition-duration-75: #{$transition-duration-75};
+  --transition-duration-100: #{$transition-duration-100};
+  --transition-duration-150: #{$transition-duration-150};
+  --transition-duration-200: #{$transition-duration-200};
+  --transition-duration-300: #{$transition-duration-300};
+  --transition-duration-500: #{$transition-duration-500};
+  --transition-duration-700: #{$transition-duration-700};
+  --transition-duration-1000: #{$transition-duration-1000};
+  
+  --transition-timing-linear: #{$transition-timing-linear};
+  --transition-timing-ease-in: #{$transition-timing-ease-in};
+  --transition-timing-ease-out: #{$transition-timing-ease-out};
+  --transition-timing-ease-in-out: #{$transition-timing-ease-in-out};
+  --transition-timing-bounce: #{$transition-timing-bounce};
+  
+  --transition-fast: #{$transition-fast};
+  --transition-normal: #{$transition-normal};
+  --transition-slow: #{$transition-slow};
+  --transition-bounce: #{$transition-bounce};
+  
+  --transition-opacity: #{$transition-opacity};
+  --transition-transform: #{$transition-transform};
+  --transition-colors: #{$transition-colors};
+  --transition-shadow: #{$transition-shadow};
+  --transition-all: #{$transition-all};
+  
+  // Z-index
+  --z-index-auto: #{$z-index-auto};
+  --z-index-0: #{$z-index-0};
+  --z-index-10: #{$z-index-10};
+  --z-index-20: #{$z-index-20};
+  --z-index-30: #{$z-index-30};
+  --z-index-40: #{$z-index-40};
+  --z-index-50: #{$z-index-50};
+  
+  --z-index-dropdown: #{$z-index-dropdown};
+  --z-index-sticky: #{$z-index-sticky};
+  --z-index-fixed: #{$z-index-fixed};
+  --z-index-modal-backdrop: #{$z-index-modal-backdrop};
+  --z-index-modal: #{$z-index-modal};
+  --z-index-popover: #{$z-index-popover};
+  --z-index-tooltip: #{$z-index-tooltip};
+  --z-index-toast: #{$z-index-toast};
+  --z-index-notification: #{$z-index-notification};
+  
+  --z-index-base: #{$z-index-base};
+  --z-index-above: #{$z-index-above};
+  --z-index-overlay: #{$z-index-overlay};
+  --z-index-popup: #{$z-index-popup};
+  
+  // Breakpoints
+  --breakpoint-xs: #{$breakpoint-xs};
+  --breakpoint-sm: #{$breakpoint-sm};
+  --breakpoint-md: #{$breakpoint-md};
+  --breakpoint-lg: #{$breakpoint-lg};
+  --breakpoint-xl: #{$breakpoint-xl};
+  --breakpoint-2xl: #{$breakpoint-2xl};
+  
+  // Container max-widths
+  --container-max-width-sm: #{$container-max-width-sm};
+  --container-max-width-md: #{$container-max-width-md};
+  --container-max-width-lg: #{$container-max-width-lg};
+  --container-max-width-xl: #{$container-max-width-xl};
+  --container-max-width-2xl: #{$container-max-width-2xl};
+  
+  // Grid
+  --grid-columns: #{$grid-columns};
+  --grid-gutter: #{$grid-gutter};
+}

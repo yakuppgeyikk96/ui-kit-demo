@@ -1,0 +1,284 @@
+@use 'styles/mixins/media' as media;
+@use 'styles/mixins/layout' as layout;
+@use 'styles/mixins/typography' as text;
+
+.app-container {
+  background-color: var(--color-gray-50);
+  @include layout.padding-all(var(--spacing-md));
+  min-height: 100vh;
+  font-family: var(--font-family-sans);
+
+  & {
+    @include layout.padding-all(var(--spacing-md));
+  }
+}
+
+h1 {
+  @include text.display-heading;
+  color: var(--color-primary);
+  @include layout.flex-center;
+  @include layout.margin-y(var(--spacing-lg));
+}
+
+h2 {
+  @include text.section-heading;
+  color: var(--color-gray-800);
+}
+
+h3 {
+  @include text.card-title;
+  color: var(--color-gray-700);
+}
+
+// Breakpoint test container
+.breakpoint-test {
+  @include media.container-full; // container-full kullanıyoruz
+  @include layout.padding-all(var(--spacing-lg));
+}
+
+// Responsive grid using media mixins
+.responsive-grid {
+  @include layout.grid-columns(1);
+  @include layout.grid-gap(var(--spacing-md));
+  @include layout.margin-y(var(--spacing-xl));
+  
+  @include media.respond-to(sm) {
+    @include layout.grid-columns(2);
+  }
+  
+  @include media.respond-to(md) {
+    @include layout.grid-columns(3);
+  }
+  
+  @include media.respond-to(lg) {
+    @include layout.grid-columns(4);
+  }
+}
+
+.grid-item {
+  background-color: white;
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--border-radius-md);
+  @include layout.padding-all(var(--spacing-md));
+  @include layout.flex-center;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-all);
+  
+  &:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+}
+
+// Responsive text
+.responsive-text {
+  margin-bottom: var(--spacing-xl);
+  
+  p {
+    margin: var(--spacing-sm) 0;
+    color: var(--color-gray-600);
+    
+    &.text-xs { font-size: var(--font-size-xs); }
+    &.text-sm { font-size: var(--font-size-sm); }
+    &.text-base { font-size: var(--font-size-base); }
+    &.text-lg { font-size: var(--font-size-lg); }
+    &.text-xl { font-size: var(--font-size-xl); }
+  }
+}
+
+// Responsive spacing using SCSS mixins
+.responsive-spacing {
+  margin-bottom: var(--spacing-xl);
+}
+
+.spacing-demo {
+  background-color: var(--color-primary);
+  color: white;
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  text-align: center;
+  
+  // Responsive padding using SCSS mixins
+  @include media.respond-to(sm) {
+    padding: var(--spacing-lg);
+  }
+  
+  @include media.respond-to(md) {
+    padding: var(--spacing-xl);
+  }
+  
+  @include media.respond-to(lg) {
+    padding: var(--spacing-2xl);
+  }
+}
+
+// Breakpoint indicator using SCSS mixins
+.breakpoint-indicator {
+  background-color: var(--color-gray-100);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-md);
+  text-align: center;
+  
+  .indicator-text {
+    font-weight: var(--font-weight-medium);
+    color: var(--color-gray-700);
+    margin-right: var(--spacing-sm);
+  }
+  
+  span {
+    display: inline-block;
+    margin: 0 var(--spacing-xs);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--border-radius-sm);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    
+    // Hide all breakpoints by default
+    display: none;
+    
+    // Show current breakpoint based on screen size using SCSS mixins
+    &.breakpoint-xs { display: inline-block; }
+    
+    @include media.respond-to(sm) {
+      &.breakpoint-xs { display: none; }
+      &.breakpoint-sm { display: inline-block; }
+    }
+    
+    @include media.respond-to(md) {
+      &.breakpoint-sm { display: none; }
+      &.breakpoint-md { display: inline-block; }
+    }
+    
+    @include media.respond-to(lg) {
+      &.breakpoint-md { display: none; }
+      &.breakpoint-lg { display: inline-block; }
+    }
+    
+    @include media.respond-to(xl) {
+      &.breakpoint-lg { display: none; }
+      &.breakpoint-xl { display: inline-block; }
+    }
+    
+    @include media.respond-to(2xl) {
+      &.breakpoint-xl { display: none; }
+      &.breakpoint-2xl { display: inline-block; }
+    }
+  }
+}
+
+// Layout test section
+.layout-test {
+  @include layout.margin-y(var(--spacing-xl));
+  
+  .flex-demo {
+    @include layout.flex-around;
+    @include layout.padding-all(var(--spacing-md));
+    background-color: white;
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--color-gray-200);
+    
+    .flex-item {
+      @include layout.padding-all(var(--spacing-sm));
+      background-color: var(--color-primary);
+      color: white;
+      border-radius: var(--border-radius-sm);
+    }
+  }
+  
+  .aspect-ratio-demo {
+    @include layout.aspect-ratio(4, 3);
+    background-color: var(--color-gray-200);
+    border-radius: var(--border-radius-md);
+    @include layout.margin-y(var(--spacing-md));
+    
+    &::after {
+      content: '16:9 Aspect Ratio';
+      @include layout.absolute-center;
+      color: var(--color-gray-600);
+      font-weight: var(--font-weight-medium);
+    }
+  }
+  
+  .circle-demo {
+    @include layout.circle(80px);
+    background-color: var(--color-success);
+    @include layout.flex-center;
+    color: white;
+    font-weight: var(--font-weight-medium);
+  }
+}
+
+// Typography test section
+.typography-test {
+  @include layout.margin-y(var(--spacing-xl));
+  
+  .text-variants {
+    @include layout.flex-column;
+    @include layout.flex-gap(var(--spacing-md));
+    
+    .heading-1 { @include text.heading-1; color: var(--color-gray-900); }
+    .heading-2 { @include text.heading-2; color: var(--color-gray-800); }
+    .heading-3 { @include text.heading-3; color: var(--color-gray-700); }
+    .heading-4 { @include text.heading-4; color: var(--color-gray-600); }
+    .heading-5 { @include text.heading-5; color: var(--color-gray-600); }
+    .heading-6 { @include text.heading-6; color: var(--color-gray-600); }
+    
+    .body-large { @include text.body-large; color: var(--color-gray-700); }
+    .body-base { @include text.body-base; color: var(--color-gray-600); }
+    .body-small { @include text.body-small; color: var(--color-gray-500); }
+    .body-xs { @include text.body-xs; color: var(--color-gray-500); }
+    
+    .caption { @include text.caption; color: var(--color-gray-400); }
+    .label { @include text.label; color: var(--color-gray-600); }
+  }
+  
+  .text-utilities {
+    @include layout.margin-y(var(--spacing-lg));
+    
+    .truncate-demo {
+      @include layout.max-width(300px);
+      @include text.truncate;
+      @include text.body-base;
+      color: var(--color-gray-700);
+      background-color: white;
+      @include layout.padding-all(var(--spacing-sm));
+      border: 1px solid var(--color-gray-200);
+      border-radius: var(--border-radius-sm);
+    }
+    
+    .truncate-lines-demo {
+      @include layout.max-width(300px);
+      @include text.truncate-lines(2);
+      @include text.body-base;
+      color: var(--color-gray-700);
+      background-color: white;
+      @include layout.padding-all(var(--spacing-sm));
+      border: 1px solid var(--color-gray-200);
+      border-radius: var(--border-radius-sm);
+    }
+  }
+}
+
+// Button test section
+.button-test {
+  @include layout.margin-y(var(--spacing-xl));
+  
+  .button-variants,
+  .button-sizes,
+  .button-states {
+    @include layout.margin-y(var(--spacing-lg));
+    
+    h3 {
+      @include text.heading-4;
+      color: var(--color-gray-700);
+      @include layout.margin-bottom(var(--spacing-md));
+    }
+  }
+  
+  .button-row {
+    @include layout.flex-start;
+    @include layout.flex-gap(var(--spacing-md));
+    @include layout.flex-wrap;
+  }
+}

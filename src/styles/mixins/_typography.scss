@@ -1,0 +1,292 @@
+// Typography mixins for text styling and manipulation
+@use '../foundations/typography' as typo;
+@use '../foundations/spacing' as spacing;
+
+// ===== HEADING MIXINS =====
+
+@mixin heading-1 {
+  font-size: typo.$font-size-4xl;
+  font-weight: typo.$font-weight-bold;
+  line-height: typo.$line-height-tight;
+  letter-spacing: typo.$letter-spacing-tight;
+}
+
+@mixin heading-2 {
+  font-size: typo.$font-size-3xl;
+  font-weight: typo.$font-weight-bold;
+  line-height: typo.$line-height-tight;
+  letter-spacing: typo.$letter-spacing-tight;
+}
+
+@mixin heading-3 {
+  font-size: typo.$font-size-2xl;
+  font-weight: typo.$font-weight-semibold;
+  line-height: typo.$line-height-snug;
+  letter-spacing: typo.$letter-spacing-normal;
+}
+
+@mixin heading-4 {
+  font-size: typo.$font-size-xl;
+  font-weight: typo.$font-weight-semibold;
+  line-height: typo.$line-height-snug;
+  letter-spacing: typo.$letter-spacing-normal;
+}
+
+@mixin heading-5 {
+  font-size: typo.$font-size-lg;
+  font-weight: typo.$font-weight-medium;
+  line-height: typo.$line-height-normal;
+  letter-spacing: typo.$letter-spacing-normal;
+}
+
+@mixin heading-6 {
+  font-size: typo.$font-size-base;
+  font-weight: typo.$font-weight-medium;
+  line-height: typo.$line-height-normal;
+  letter-spacing: typo.$letter-spacing-normal;
+}
+
+// ===== BODY TEXT MIXINS =====
+
+@mixin body-large {
+  font-size: typo.$font-size-lg;
+  font-weight: typo.$font-weight-normal;
+  line-height: typo.$line-height-relaxed;
+  letter-spacing: typo.$letter-spacing-normal;
+}
+
+@mixin body-base {
+  font-size: typo.$font-size-base;
+  font-weight: typo.$font-weight-normal;
+  line-height: typo.$line-height-normal;
+  letter-spacing: typo.$letter-spacing-normal;
+}
+
+@mixin body-small {
+  font-size: typo.$font-size-sm;
+  font-weight: typo.$font-weight-normal;
+  line-height: typo.$line-height-normal;
+  letter-spacing: typo.$letter-spacing-normal;
+}
+
+@mixin body-xs {
+  font-size: typo.$font-size-xs;
+  font-weight: typo.$font-weight-normal;
+  line-height: typo.$line-height-normal;
+  letter-spacing: typo.$letter-spacing-wide;
+}
+
+// ===== CAPTION & LABEL MIXINS =====
+
+@mixin caption {
+  font-size: typo.$font-size-xs;
+  font-weight: typo.$font-weight-medium;
+  line-height: typo.$line-height-normal;
+  letter-spacing: typo.$letter-spacing-wide;
+  text-transform: uppercase;
+}
+
+@mixin label {
+  font-size: typo.$font-size-sm;
+  font-weight: typo.$font-weight-medium;
+  line-height: typo.$line-height-normal;
+  letter-spacing: typo.$letter-spacing-normal;
+}
+
+// ===== TEXT UTILITY MIXINS =====
+
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin truncate-lines($lines: 2) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@mixin text-center {
+  text-align: center;
+}
+
+@mixin text-left {
+  text-align: left;
+}
+
+@mixin text-right {
+  text-align: right;
+}
+
+@mixin text-justify {
+  text-align: justify;
+}
+
+// ===== FONT WEIGHT MIXINS =====
+
+@mixin font-light {
+  font-weight: typo.$font-weight-light;
+}
+
+@mixin font-normal {
+  font-weight: typo.$font-weight-normal;
+}
+
+@mixin font-medium {
+  font-weight: typo.$font-weight-medium;
+}
+
+@mixin font-semibold {
+  font-weight: typo.$font-weight-semibold;
+}
+
+@mixin font-bold {
+  font-weight: typo.$font-weight-bold;
+}
+
+// ===== TEXT TRANSFORM MIXINS =====
+
+@mixin uppercase {
+  text-transform: uppercase;
+}
+
+@mixin lowercase {
+  text-transform: lowercase;
+}
+
+@mixin capitalize {
+  text-transform: capitalize;
+}
+
+@mixin no-transform {
+  text-transform: none;
+}
+
+// ===== TEXT DECORATION MIXINS =====
+
+@mixin underline {
+  text-decoration: underline;
+}
+
+@mixin no-underline {
+  text-decoration: none;
+}
+
+@mixin line-through {
+  text-decoration: line-through;
+}
+
+// ===== SELECTION MIXINS =====
+
+@mixin selection($background-color: #b3d4fc, $text-color: #000) {
+  &::selection {
+    background-color: $background-color;
+    color: $text-color;
+  }
+  
+  &::-moz-selection {
+    background-color: $background-color;
+    color: $text-color;
+  }
+}
+
+// ===== RESPONSIVE TYPOGRAPHY MIXINS =====
+
+@mixin responsive-text($mobile-size, $tablet-size, $desktop-size) {
+  font-size: $mobile-size;
+  
+  @media (min-width: 768px) {
+    font-size: $tablet-size;
+  }
+  
+  @media (min-width: 1024px) {
+    font-size: $desktop-size;
+  }
+}
+
+// ===== COMPOUND TYPOGRAPHY MIXINS =====
+
+@mixin display-heading {
+  @include heading-1;
+  @include text-center;
+  @include selection;
+}
+
+@mixin section-heading {
+  @include heading-3;
+  @include text-left;
+  margin-bottom: spacing.$spacing-md;
+}
+
+@mixin card-title {
+  @include heading-4;
+  @include text-left;
+  margin-bottom: spacing.$spacing-sm;
+}
+
+@mixin button-text {
+  @include body-base;
+  @include font-medium;
+  @include no-underline;
+}
+
+@mixin input-label {
+  @include label;
+  margin-bottom: spacing.$spacing-xs;
+  @include text-left;
+}
+
+// ===== ACCESSIBILITY MIXINS =====
+
+@mixin sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@mixin focus-visible {
+  &:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+  }
+}
+
+// ===== TEXT EFFECTS MIXINS =====
+
+@mixin text-shadow($x: 0, $y: 1px, $blur: 2px, $color: rgba(0, 0, 0, 0.1)) {
+  text-shadow: $x $y $blur $color;
+}
+
+@mixin text-glow($color: #3b82f6, $intensity: 0.5) {
+  text-shadow: 0 0 10px rgba($color, $intensity);
+}
+
+// ===== LINE HEIGHT UTILITIES =====
+
+@mixin line-height-tight {
+  line-height: typo.$line-height-tight;
+}
+
+@mixin line-height-snug {
+  line-height: typo.$line-height-snug;
+}
+
+@mixin line-height-normal {
+  line-height: typo.$line-height-normal;
+}
+
+@mixin line-height-relaxed {
+  line-height: typo.$line-height-relaxed;
+}
+
+@mixin line-height-loose {
+  line-height: typo.$line-height-loose;
+}

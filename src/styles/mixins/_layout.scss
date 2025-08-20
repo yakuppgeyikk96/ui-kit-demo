@@ -1,0 +1,286 @@
+// Layout mixins for common layout patterns
+@use '../foundations/spacing' as spacing;
+@use 'sass:math';
+
+// ===== FLEXBOX MIXINS =====
+
+// Basic flexbox layouts
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-around {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+@mixin flex-start {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+@mixin flex-end {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flex-column-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@mixin flex-column-between {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+// Flexbox with gap
+@mixin flex-gap($gap: spacing.$spacing-md) {
+  gap: $gap;
+}
+
+@mixin flex-center-gap($gap: spacing.$spacing-md) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $gap;
+}
+
+@mixin flex-between-gap($gap: spacing.$spacing-md) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $gap;
+}
+
+// Flexbox wrap utilities
+@mixin flex-wrap {
+  flex-wrap: wrap;
+}
+
+@mixin flex-nowrap {
+  flex-wrap: nowrap;
+}
+
+@mixin flex-wrap-reverse {
+  flex-wrap: wrap-reverse;
+}
+
+// ===== GRID MIXINS =====
+
+@mixin grid-center {
+  display: grid;
+  place-items: center;
+}
+
+@mixin grid-columns($columns: 1) {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+}
+
+@mixin grid-rows($rows: 1) {
+  display: grid;
+  grid-template-columns: repeat($rows, 1fr);
+}
+
+@mixin grid-gap($gap: spacing.$spacing-md) {
+  gap: $gap;
+}
+
+@mixin grid-auto-fit($min-width: 200px, $gap: spacing.$spacing-md) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax($min-width, 1fr));
+  gap: $gap;
+}
+
+@mixin grid-auto-fill($min-width: 200px, $gap: spacing.$spacing-md) {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax($min-width, 1fr));
+  gap: $gap;
+}
+
+// ===== POSITIONING MIXINS =====
+
+@mixin absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin fixed-center {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin sticky-top {
+  position: sticky;
+  top: 0;
+}
+
+@mixin sticky-bottom {
+  position: sticky;
+  bottom: 0;
+}
+
+// ===== CONTAINER MIXINS =====
+
+@mixin full-width {
+  width: 100%;
+}
+
+@mixin full-height {
+  height: 100%;
+}
+
+@mixin full-viewport {
+  width: 100vw;
+  height: 100vh;
+}
+
+@mixin max-width($width: 1200px) {
+  max-width: $width;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// ===== SPACING MIXINS =====
+
+@mixin padding-all($size: spacing.$spacing-md) {
+  padding: $size;
+}
+
+@mixin padding-x($size: spacing.$spacing-md) {
+  padding-left: $size;
+  padding-right: $size;
+}
+
+@mixin padding-y($size: spacing.$spacing-md) {
+  padding-top: $size;
+  padding-bottom: $size;
+}
+
+@mixin padding-top($size: spacing.$spacing-md) {
+  padding-top: $size;
+}
+
+@mixin padding-bottom($size: spacing.$spacing-md) {
+  padding-bottom: $size;
+}
+
+@mixin padding-left($size: spacing.$spacing-md) {
+  padding-left: $size;
+}
+
+@mixin padding-right($size: spacing.$spacing-md) {
+  padding-right: $size;
+}
+
+@mixin margin-all($size: spacing.$spacing-md) {
+  margin: $size;
+}
+
+@mixin margin-x($size: spacing.$spacing-md) {
+  margin-left: $size;
+  margin-right: $size;
+}
+
+@mixin margin-y($size: spacing.$spacing-md) {
+  margin-top: $size;
+  margin-bottom: $size;
+}
+
+@mixin margin-top($size: spacing.$spacing-md) {
+  margin-top: $size;
+}
+
+@mixin margin-bottom($size: spacing.$spacing-md) {
+  margin-bottom: $size;
+}
+
+@mixin margin-left($size: spacing.$spacing-md) {
+  margin-left: $size;
+}
+
+@mixin margin-right($size: spacing.$spacing-md) {
+  margin-right: $size;
+}
+
+// ===== SPECIAL LAYOUT MIXINS =====
+
+@mixin aspect-ratio($width, $height) {
+  position: relative;
+  
+  &::before {
+    content: '';
+    display: block;
+    padding-top: math.div($height, $width) * 100%;
+  }
+  
+  > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@mixin square($size: 100px) {
+  width: $size;
+  height: $size;
+}
+
+@mixin circle($size: 100px) {
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+}
+
+// ===== OVERFLOW MIXINS =====
+
+@mixin scrollable {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@mixin scrollable-x {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+@mixin scrollable-y {
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+@mixin no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

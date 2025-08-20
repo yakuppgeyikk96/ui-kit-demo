@@ -1,0 +1,79 @@
+// Transition duration system
+$transition-duration-75: 75ms;
+$transition-duration-100: 100ms;
+$transition-duration-150: 150ms;
+$transition-duration-200: 200ms;
+$transition-duration-300: 300ms;
+$transition-duration-500: 500ms;
+$transition-duration-700: 700ms;
+$transition-duration-1000: 1000ms;
+
+// Transition timing functions
+$transition-timing-linear: linear;
+$transition-timing-ease-in: ease-in;
+$transition-timing-ease-out: ease-out;
+$transition-timing-ease-in-out: ease-in-out;
+$transition-timing-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+// Common transition combinations
+$transition-fast: $transition-duration-150 $transition-timing-ease-out;
+$transition-normal: $transition-duration-200 $transition-timing-ease-out;
+$transition-slow: $transition-duration-300 $transition-timing-ease-out;
+$transition-bounce: $transition-duration-500 $transition-timing-bounce;
+
+// Specific transition presets
+$transition-opacity: opacity $transition-duration-200 $transition-timing-ease-out;
+$transition-transform: transform $transition-duration-200 $transition-timing-ease-out;
+$transition-colors: color $transition-duration-200 $transition-timing-ease-out, 
+                    background-color $transition-duration-200 $transition-timing-ease-out,
+                    border-color $transition-duration-200 $transition-timing-ease-out;
+$transition-shadow: box-shadow $transition-duration-200 $transition-timing-ease-out;
+$transition-all: all $transition-duration-200 $transition-timing-ease-out;
+
+// Animation keyframes
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+// Animation duration classes
+$animation-duration-fast: $transition-duration-200;
+$animation-duration-normal: $transition-duration-300;
+$animation-duration-slow: $transition-duration-500;

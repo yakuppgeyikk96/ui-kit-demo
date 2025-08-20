@@ -1,0 +1,91 @@
+
+// Button size variables
+$btn-icon-sizes: (
+  xs: 12px,
+  sm: 14px,
+  md: 16px,
+  lg: 18px,
+  xl: 20px
+);
+
+$btn-min-heights: (
+  xs: 24px,
+  sm: 32px,
+  md: 40px,
+  lg: 48px,
+  xl: 56px
+);
+
+$btn-padding: (
+  xs: (var(--spacing-xs), var(--spacing-sm)),
+  sm: (var(--spacing-sm), var(--spacing-md)),
+  md: (var(--spacing-sm), var(--spacing-md)),
+  lg: (var(--spacing-md), var(--spacing-lg)),
+  xl: (var(--spacing-md), var(--spacing-xl))
+);
+
+$btn-font-sizes: (
+  xs: var(--font-size-xs),
+  sm: var(--font-size-sm),
+  md: var(--font-size-base),
+  lg: var(--font-size-lg),
+  xl: var(--font-size-xl)
+);
+
+// Button color variables
+$btn-hover-colors: (
+  success: #059669,
+  warning: #d97706,
+  error: #dc2626
+);
+
+// Button mixins
+@mixin btn-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  border: none;
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  font-family: var(--font-family-sans);
+  text-decoration: none;
+  transition: var(--transition-all);
+  position: relative;
+  overflow: hidden;
+}
+
+@mixin btn-size($size) {
+  $padding: map-get($btn-padding, $size);
+  $min-height: map-get($btn-min-heights, $size);
+  $font-size: map-get($btn-font-sizes, $size);
+  
+  padding: nth($padding, 1) nth($padding, 2);
+  min-height: $min-height;
+  font-size: $font-size;
+}
+
+@mixin btn-variant($bg-color, $text-color, $hover-bg-color) {
+  background-color: $bg-color;
+  color: $text-color;
+  
+  &:hover:not(.btn--disabled):not(.btn--loading) {
+    background-color: $hover-bg-color;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  &:active:not(.btn--disabled):not(.btn--loading) {
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
+  }
+}
+
+@mixin btn-icon-size($size) {
+  $icon-size: map-get($btn-icon-sizes, $size);
+  
+  .btn__icon {
+    width: $icon-size;
+    height: $icon-size;
+  }
+}
