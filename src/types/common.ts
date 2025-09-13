@@ -11,9 +11,9 @@ export interface BaseComponentProps {
 
 // Interactive component props
 export interface InteractiveProps extends BaseComponentProps {
-  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  onFocus?: () => void;
-  onBlur?: () => void;
+  onClick?: (event: React.MouseEvent<HTMLElement>) => void;
+  onFocus?: (event: React.FocusEvent<HTMLElement>) => void;
+  onBlur?: (event: React.FocusEvent<HTMLElement>) => void;
   icon?: ReactNode;
   iconPosition?: "left" | "right";
 }
